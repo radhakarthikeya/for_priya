@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Karthik 🧸 Priya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fdeef2; --bg2:#f6e6fb; --card:#fffafc;
+    --ink:#5b3a4a; --ink-soft:#8a6b78;
+    --pink:#f4a3c1; --pink-deep:#e8789f; --lav:#c9a8e0;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#2b1e27; --bg2:#241c2c; --card:#33242f;
+      --ink:#f6e3ec; --ink-soft:#d3aec0; --pink:#e995b8; --pink-deep:#f0a8c6; --lav:#c9a8e0;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#2b1e27; --bg2:#241c2c; --card:#33242f;
+    --ink:#f6e3ec; --ink-soft:#d3aec0; --pink:#e995b8; --pink-deep:#f0a8c6; --lav:#c9a8e0;
+  }
+  html{scroll-padding-top:env(safe-area-inset-top,0px); height:100%;}
+  *{box-sizing:border-box;}
+  body{
+    margin:0; min-height:100%;
+    background:linear-gradient(160deg,var(--bg),var(--bg2));
+    color:var(--ink); font-family:'Quicksand',sans-serif;
+    display:flex; flex-direction:column; align-items:center;
+    overflow-x:hidden; position:relative;
+  }
+  .sky{position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0;}
+  .bit{position:absolute; top:-8%; animation:fall linear infinite;}
+  @keyframes fall{ to{ transform:translateY(115vh) rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce){ .bit{animation:none; display:none;} }
+
+  .dots{ display:flex; gap:.5rem; margin:1.4rem 0 .2rem; z-index:1; }
+  .dot{ width:8px; height:8px; border-radius:50%; background:var(--lav); opacity:.4; transition:opacity .2s; }
+  .dot.active{ opacity:1; background:var(--pink-deep); }
+
+  main{
+    width:100%; max-width:520px; padding:0 1.4rem 4rem;
+    position:relative; z-index:1; flex:1;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+  }
+  .page{ display:none; width:100%; flex-direction:column; align-items:center; gap:1.6rem; text-align:center; animation:rise .5s ease both; }
+  .page.active{ display:flex; }
+  @keyframes rise{ from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);} }
+
+  .teddy{ font-size:4rem; line-height:1; animation:wiggle 3.2s ease-in-out infinite; }
+  @keyframes wiggle{ 0%,100%{transform:rotate(-4deg);} 50%{transform:rotate(4deg);} }
+  @media (prefers-reduced-motion: reduce){ .teddy{animation:none;} }
+
+  h1{ font-family:'Baloo 2',sans-serif; font-weight:700; font-size:clamp(1.5rem,6vw,2.1rem); margin:0; color:var(--pink-deep); }
+  h2{ font-family:'Baloo 2',sans-serif; font-weight:700; font-size:1.3rem; margin:0; color:var(--ink); }
+  p{ font-size:1.02rem; line-height:1.75; color:var(--ink-soft); max-width:40ch; margin:0; }
+
+  .card{ width:100%; background:var(--card); border-radius:26px; padding:1.8rem 1.5rem 2.1rem; box-shadow:0 18px 38px rgba(180,90,130,.18); }
+  .paws{ font-size:1.3rem; letter-spacing:.4rem; margin-bottom:.6rem; }
+
+  .reasons{ display:grid; grid-template-columns:1fr 1fr; gap:.7rem; width:100%; }
+  @media (max-width:420px){ .reasons{grid-template-columns:1fr;} }
+  .reason-card{ background:var(--card); border-radius:16px; padding:.9rem 1rem; font-size:.9rem; line-height:1.5; color:var(--ink-soft); box-shadow:0 8px 18px rgba(180,90,130,.1); }
+  .reason-card b{ display:block; font-family:'Baloo 2',sans-serif; color:var(--pink-deep); font-size:1rem; margin-bottom:.2rem; }
+
+  .row{ display:flex; gap:.9rem; justify-content:center; flex-wrap:wrap; position:relative; min-height:56px; }
+  button{ font-family:'Baloo 2',sans-serif; font-weight:700; font-size:1.02rem; padding:.8rem 1.8rem; border-radius:999px; border:none; cursor:pointer; transition:transform .15s ease; }
+  button:focus-visible{ outline:2px solid var(--pink-deep); outline-offset:2px; }
+  .yes{ background:var(--pink-deep); color:#fff; box-shadow:0 8px 18px rgba(232,120,159,.4); }
+  .yes:hover{ transform:translateY(-2px) scale(1.03); }
+  .no{ background:var(--lav); color:#fff; }
+  .next-btn{ background:var(--pink); color:#fff; margin-top:.4rem; }
+  .next-btn:hover{ transform:translateY(-2px); }
+
+  #msg{ font-family:'Baloo 2',sans-serif; font-size:1.1rem; color:var(--pink-deep); min-height:1.6em; }
+  .teddy-army{ display:flex; gap:.4rem; justify-content:center; font-size:1.7rem; flex-wrap:wrap; max-width:280px; }
+  .teddy-army span{ display:inline-block; animation:pop .4s ease both; }
+  @keyframes pop{ from{transform:scale(0);opacity:0;} to{transform:scale(1);opacity:1;} }
+
+  .signoff{ font-family:'Baloo 2',sans-serif; font-style:italic; font-size:1.15rem; color:var(--pink-deep); }
+  footer{ font-size:.8rem; color:var(--ink-soft); padding-bottom:1rem; z-index:1; }
+
+  .mascot{
+    position:fixed; right:14px; bottom:14px; z-index:5;
+    display:flex; align-items:flex-end; gap:.5rem;
+    max-width:min(78vw,300px);
+  }
+  .mascot .panda{
+    font-size:2.6rem; flex-shrink:0;
+    animation:sway 3.6s ease-in-out infinite;
+    filter:drop-shadow(0 6px 10px rgba(90,40,50,.2));
+  }
+  @keyframes sway{ 0%,100%{transform:rotate(-6deg) translateY(0);} 50%{transform:rotate(6deg) translateY(-3px);} }
+  @media (prefers-reduced-motion: reduce){ .mascot .panda{animation:none;} }
+  .bubble{
+    background:var(--card); color:var(--ink);
+    border-radius:16px 16px 4px 16px;
+    padding:.55rem .8rem;
+    font-size:.82rem; line-height:1.4;
+    box-shadow:0 8px 18px rgba(180,90,130,.18);
+    max-width:200px;
+  }
+  .bubble b{ display:block; font-family:'Baloo 2',sans-serif; color:var(--pink-deep); font-size:.78rem; margin-bottom:.15rem; }
+</style>
+</head>
+<body>
+
+<div class="sky" id="sky" aria-hidden="true"></div>
+<div class="dots" id="dots"></div>
+
+<main>
+
+  <section class="page active" data-page="0">
+    <div class="teddy">🧸</div>
+    <h1>Hi Priya</h1>
+    <p>Karthik made you a little something. It's not much, but every bit of it is real. Ready?</p>
+    <button class="next-btn" onclick="goTo(1)">Open it →</button>
+  </section>
+
+  <section class="page" data-page="1">
+    <div class="card">
+      <div class="paws">🐾 🐾 🐾</div>
+      <h2>I'm sorry, Priya</h2>
+      <p>I hurt you, and I keep thinking about it. Not to make myself feel bad — but because you deserve to know I actually get it. No excuses. Just me, saying sorry, and meaning it.</p>
+      <p class="signoff">— Karthik</p>
+    </div>
+    <button class="next-btn" onclick="goTo(2)">Continue →</button>
+  </section>
+
+  <section class="page" data-page="2">
+    <h2>A few reasons you matter to me</h2>
+    <div class="reasons">
+      <div class="reason-card"><b>Your patience</b>You give me room to mess up and still try again.</div>
+      <div class="reason-card"><b>Your honesty</b>You never let me get away with the easy answer.</div>
+      <div class="reason-card"><b>Your laugh</b>It's the thing I miss most when we're not okay.</div>
+      <div class="reason-card"><b>Us, together</b>Even on hard days, I'd still pick you.</div>
+    </div>
+    <button class="next-btn" onclick="goTo(3)">One more thing →</button>
+  </section>
+
+  <section class="page" data-page="3">
+    <div class="card">
+      <div class="paws">🐾 🐾 🐾</div>
+      <h2 id="question">Priya, will you forgive Karthik?</h2>
+      <div class="row" id="btnRow">
+        <button class="yes" id="yesBtn">Yes 🧸💗</button>
+        <button class="no" id="noBtn">No</button>
+      </div>
+      <div id="msg"></div>
+      <div class="teddy-army" id="army"></div>
+    </div>
+  </section>
+
+  <section class="page" data-page="4">
+    <div class="teddy">🎉</div>
+    <h1>Karthik ♥ Priya</h1>
+    <p>Thank you for giving me another chance. I promise to be worth it.</p>
+  </section>
+
+</main>
+
+<footer>made by Karthik, for Priya</footer>
+
+<div class="mascot">
+  <div class="bubble" id="pandaBubble"><b>Teddy Panda</b>Hi Priya! Karthik asked me to help him say sorry 🐼</div>
+  <div class="panda" aria-hidden="true">🐼</div>
+</div>
+
+<script>
+  const pages = document.querySelectorAll('.page');
+  const dotsWrap = document.getElementById('dots');
+  pages.forEach((_,i)=>{
+    const d = document.createElement('div');
+    d.className = 'dot'+(i===0?' active':'');
+    dotsWrap.appendChild(d);
+  });
+  const dots = document.querySelectorAll('.dot');
+
+  const pandaLines = [
+    "Hi Priya! Karthik asked me to help him say sorry 🐼",
+    "This part's the real talk. Bear with him (pun intended) 🧸",
+    "He means every one of these, promise!",
+    "No pressure, Priya. I'll just be over here rooting for him.",
+    "Yayyy!! Teddy Panda approves of this reunion 🎉"
+  ];
+  const pandaBubble = document.getElementById('pandaBubble');
+  function sayPanda(i){
+    pandaBubble.innerHTML = '<b>Teddy Panda</b>' + pandaLines[i];
+  }
+
+  function goTo(i){
+    pages.forEach(p=>p.classList.remove('active'));
+    dots.forEach(d=>d.classList.remove('active'));
+    document.querySelector('.page[data-page="'+i+'"]').classList.add('active');
+    dots[i].classList.add('active');
+    sayPanda(i);
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  // falling cute bits
+  const sky = document.getElementById('sky');
+  const glyphs = ['🧸','💗','✨','🎀'];
+  for(let i=0;i<16;i++){
+    const b = document.createElement('span');
+    b.className='bit';
+    b.textContent = glyphs[Math.floor(Math.random()*glyphs.length)];
+    b.style.left = Math.random()*100+'vw';
+    b.style.fontSize = (0.9+Math.random()*1.1)+'rem';
+    b.style.animationDuration = (8+Math.random()*9)+'s';
+    b.style.animationDelay = (Math.random()*9)+'s';
+    b.style.opacity = 0.25+Math.random()*0.4;
+    sky.appendChild(b);
+  }
+
+  // forgiveness page logic
+  const question = document.getElementById('question');
+  const yesBtn = document.getElementById('yesBtn');
+  const noBtn = document.getElementById('noBtn');
+  const msg = document.getElementById('msg');
+  const army = document.getElementById('army');
+  const row = document.getElementById('btnRow');
+
+  const noLines = ["Nooo don't go 🥺","The teddy is getting worried...","Pretty please, Priya? 🧸","Okay I'll just wait here forever then."];
+  const questions = ["Priya, will you forgive Karthik?","Are we okay again? 🥹","Pinky promise I'll be better — deal?","One more chance for the bear?"];
+  let tries = 0;
+
+  noBtn.addEventListener('click', ()=>{
+    if(tries < noLines.length){
+      msg.textContent = noLines[tries];
+      question.textContent = questions[Math.min(tries+1, questions.length-1)];
+      tries++;
+      const maxX = row.clientWidth - noBtn.offsetWidth - 10;
+      const maxY = 30;
+      noBtn.style.position='relative';
+      noBtn.style.left = (Math.random()*maxX - maxX/2)+'px';
+      noBtn.style.top = (Math.random()*maxY - maxY/2)+'px';
+      sayPanda(3);
+    } else {
+      noBtn.disabled = true;
+      noBtn.style.opacity = .4;
+      msg.textContent = "It's okay, take your time 💗";
+      pandaBubble.innerHTML = '<b>Teddy Panda</b>Totally okay. I\'ll wait here too 🐼';
+    }
+  });
+
+  yesBtn.addEventListener('click', ()=>{
+    question.textContent = "Yay!! Best news all day 🎉";
+    msg.textContent = "Sending you the biggest teddy hug right now.";
+    noBtn.disabled = true;
+    yesBtn.disabled = true;
+    army.innerHTML = '';
+    for(let i=0;i<7;i++){
+      const t = document.createElement('span');
+      t.textContent = '🧸';
+      t.style.animationDelay = (i*0.08)+'s';
+      army.appendChild(t);
+    }
+    pandaBubble.innerHTML = '<b>Teddy Panda</b>I knew you had it in you, Priya! 🎉';
+    setTimeout(()=>goTo(4), 1600);
+  });
+</script>
+</body>
+</html>
